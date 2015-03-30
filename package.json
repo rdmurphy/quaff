@@ -1,0 +1,30 @@
+{
+  "name": "quaff",
+  "version": "1.0.0",
+  "description": "Collect JSON/YAML/YML files from a source folder and convert them into a single object.",
+  "repository": "rdmurphy/quaff",
+  "author": "Ryan Murphy <ryan@rdmurphy.org>",
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+ "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "data",
+    "json",
+    "yaml",
+    "yml"
+  ],
+  "devDependencies": {
+    "mocha": "^2.2.1"
+  },
+  "dependencies": {
+    "glob": "^5.0.3",
+    "js-yaml": "^3.2.7"
+  }
+}
