@@ -4,6 +4,8 @@ A data pipeline helper written in node that works similar to [Middleman](https:/
 
 Point the library at a folder filled with JSON and/or YAML files and get a JavaScript object back that reflects the folder's structure. Great for pulling data in to templates!
 
+Under the hood it uses JavaScript's built in [JSON support](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) and [`js-yaml`](https://github.com/nodeca/js-yaml) to read files.
+
 ## Installation
 
 ```sh
@@ -12,7 +14,7 @@ npm install quaff --save-dev
 
 ## Usage
 
-Assume a folder with this structure:
+Assume a folder with this structure.
 
 ```
 data/
