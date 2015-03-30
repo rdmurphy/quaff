@@ -1,6 +1,6 @@
 ![](http://i.imgur.com/yC80ftQ.png)
 
-# quaff
+# quaff [![Build Status](https://travis-ci.org/rdmurphy/quaff.svg?branch=master)](https://travis-ci.org/rdmurphy/quaff)
 
 A data pipeline helper written in node that works similar to [Middleman](https://middlemanapp.com/)'s [Data Files](https://middlemanapp.com/advanced/data_files/) collector.
 
