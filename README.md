@@ -1,3 +1,5 @@
+![](http://i.imgur.com/yC80ftQ.png)
+
 # quaff
 
 A data pipeline helper written in node that works similar to [Middleman](https://middlemanapp.com/)'s [Data Files](https://middlemanapp.com/advanced/data_files/) collector.
