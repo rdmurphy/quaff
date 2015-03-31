@@ -48,7 +48,7 @@ And the results...
       "Sammy"
     ],
     "dogs": [
-      "Snazzy"
+      "Snazzy",
       "Cally"
     ]
   },
