@@ -14,7 +14,7 @@ Under the hood it uses JavaScript's built in [JSON support](https://developer.mo
 npm install quaff --save-dev
 ```
 
-Requires the latest `iojs` or `node>=0.12.0`.
+Requires the latest `iojs` or `node>=0.10.0`.
 
 ## Usage
 
