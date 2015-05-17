@@ -24,10 +24,9 @@ module.exports = function(rawDataDir) {
   var payload = {};
 
   files.forEach(function(file) {
-    var props = path.parse(file);
-    var extension = props.ext;
-    var basename = props.name;
-    var dir = path.normalize(props.dir);
+    var extension = path.extname(file);
+    var basename = path.basename(file, extension);
+    var dir = path.normalize(path.dirname(file));
 
     var data;
 
