@@ -1,13 +1,14 @@
 'use strict';
 
-var fs = require('fs');
-var glob = require('glob');
-var path = require('path');
-var yaml = require('js-yaml');
+const fs = require('fs');
+const glob = require('glob');
+const path = require('path');
+const yaml = require('js-yaml');
+const dsv = require('d3-dsv');
 
 
-function normalizePath(dir) {
-  var cleanDir = path.normalize(dir);
+function normalizePath (dir) {
+  const cleanDir = path.normalize(dir);
 
   if (cleanDir.slice(-path.sep.length) !== path.sep) {
     return cleanDir + path.sep;
@@ -16,34 +17,39 @@ function normalizePath(dir) {
   return cleanDir;
 }
 
-module.exports = function(rawDataDir) {
-  var dataDir = normalizePath(rawDataDir);
-  var depth = dataDir.split(path.sep).length - 1;
-  var files = glob.sync(dataDir + '**/*.{json,yaml,yml}');
+module.exports = function (rawDataDir) {
+  const dataDir = normalizePath(rawDataDir);
+  const depth = dataDir.split(path.sep).length - 1;
+  const files = glob.sync(dataDir + '**/*.{json,yaml,yml,csv,tsv}');
 
-  var payload = {};
+  const payload = {};
 
-  files.forEach(function(file) {
-    var extension = path.extname(file);
-    var basename = path.basename(file, extension);
-    var dir = path.normalize(path.dirname(file));
+  files.forEach(function (file) {
+    const extension = path.extname(file);
+    const basename = path.basename(file, extension);
+    const dir = path.normalize(path.dirname(file));
+    const fileContents = fs.readFileSync(file, 'utf8');
 
-    var data;
+    let data;
 
     if (extension === '.json') {
-      data = JSON.parse(fs.readFileSync(file, 'utf8'));
+      data = JSON.parse(fileContents);
     } else if (extension === '.yaml' || extension === '.yml') {
-      data = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
+      data = yaml.safeLoad(fileContents);
+    } else if (extension === '.csv') {
+      data = dsv.csv.parse(fileContents);
+    } else if (extension === '.tsv') {
+      data = dsv.tsv.parse(fileContents);
     } else {
       return;
     }
 
-    var obj = payload;
+    let obj = payload;
 
-    var dirs = dir.split(path.sep);
+    const dirs = dir.split(path.sep);
     dirs.splice(0, depth); // dump the root dataDir
 
-    dirs.forEach(function(dir) {
+    dirs.forEach(function (dir) {
       if (!obj.hasOwnProperty(dir)) {
         obj[dir] = {};
       }

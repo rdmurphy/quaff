@@ -1,6 +1,7 @@
 language: node_js
 node_js:
-  - "node"
-  - "0.10"
-  - "0.12"
-  - "iojs"
+  - '5'
+  - '4'
+after_success:
+  - npm run coverage
+  - npm run coveralls

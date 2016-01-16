@@ -1,12 +1,12 @@
 ![](http://i.imgur.com/yC80ftQ.png)
 
-# quaff [![Build Status](https://travis-ci.org/rdmurphy/quaff.svg?branch=master)](https://travis-ci.org/rdmurphy/quaff) [![Dependencies](https://david-dm.org/rdmurphy/quaff.svg)](https://david-dm.org/rdmurphy/quaff)
+# quaff [![Build Status](https://travis-ci.org/rdmurphy/quaff.svg?branch=master)](https://travis-ci.org/rdmurphy/quaff) [![Dependencies](https://david-dm.org/rdmurphy/quaff.svg)](https://david-dm.org/rdmurphy/quaff) [![Coverage Status](https://coveralls.io/repos/rdmurphy/quaff/badge.svg?branch=master&service=github)](https://coveralls.io/github/rdmurphy/quaff?branch=master)
 
 A data pipeline helper written in node that works similar to [Middleman](https://middlemanapp.com/)'s [Data Files](https://middlemanapp.com/advanced/data_files/) collector.
 
-Point the library at a folder filled with JSON and/or YAML files and get a JavaScript object back that reflects the folder's structure. Great for pulling data in to templates!
+Point the library at a folder filled with JSON, YAML, CSV and/or TSV files and get a JavaScript object back that reflects the folder's structure. Great for pulling data in to templates!
 
-Under the hood it uses JavaScript's built in [JSON support](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON) and [`js-yaml`](https://github.com/nodeca/js-yaml) to read files.
+Under the hood it uses JavaScript's built in [JSON support](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON), [`js-yaml`](https://github.com/nodeca/js-yaml) and [`d3-dsv`](https://github.com/d3/d3-dsv) to read files.
 
 ## Installation
 
@@ -14,7 +14,7 @@ Under the hood it uses JavaScript's built in [JSON support](https://developer.mo
 npm install quaff --save-dev
 ```
 
-Requires the latest `iojs` or `node>=0.10.0`.
+Requires `node>=4`.
 
 ## Usage
 
@@ -25,6 +25,7 @@ data/
   mammals/
     cats.json
     dogs.json
+    bears.csv
   birds/
     parrots.yml
 ```
@@ -50,6 +51,16 @@ And the results...
     "dogs": [
       "Snazzy",
       "Cally"
+    ],
+    "bears": [
+      {
+        "name": "Steve",
+        "type": "Polar bear"
+      },
+      {
+        "name": "Angelica",
+        "type": "Sun bear"
+      }
     ]
   },
   "birds": {

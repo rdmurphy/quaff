@@ -1,0 +1,5 @@
+name,instagram
+Trinket,https://instagram.com/trinketbaby/
+Ernie,https://instagram.com/sirbunnybottom/
+Tibby,https://instagram.com/tibbythecorgi/
+Pudge,https://instagram.com/pudgethecorgi/
