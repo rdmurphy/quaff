@@ -2,10 +2,11 @@
 
 'use strict';
 
-var assert = require('assert');
-var quaff = require('../.');
-var fs = require('fs');
-var yaml = require('js-yaml');
+const assert = require('assert');
+const quaff = require('../.');
+const fs = require('fs');
+const yaml = require('js-yaml');
+const dsv = require('d3-dsv');
 
 it('should return object generated from json', function() {
   assert.deepEqual(quaff('./test/source/basic_json'), {
@@ -25,6 +26,18 @@ it('should return object generated from yml', function() {
   });
 });
 
+it('should return object generated from csv', function() {
+  assert.deepEqual(quaff('./test/source/basic_csv'), {
+    corgis: dsv.csv.parse(fs.readFileSync('./test/source/basic_csv/corgis.csv', 'utf8'))
+  });
+});
+
+it('should return object generated from tsv', function() {
+  assert.deepEqual(quaff('./test/source/basic_tsv'), {
+    corgis: dsv.tsv.parse(fs.readFileSync('./test/source/basic_tsv/corgis.tsv', 'utf8'))
+  });
+});
+
 it('should ignore files that do not match filters', function() {
   assert.deepEqual(quaff('./test/source/non_match_file'), {
     corgis: yaml.safeLoad(fs.readFileSync('./test/source/non_match_file/corgis.yaml', 'utf8'))
@@ -35,7 +48,8 @@ it('should return object representing data one subdirectory deep', function() {
   assert.deepEqual(quaff('./test/source/single_depth'), {
     corgis: JSON.parse(fs.readFileSync('./test/source/single_depth/corgis.json', 'utf8')),
     others: {
-      malamutes: JSON.parse(fs.readFileSync('./test/source/single_depth/others/malamutes.json', 'utf8'))
+      malamutes: JSON.parse(fs.readFileSync('./test/source/single_depth/others/malamutes.json', 'utf8')),
+      corgis: dsv.csv.parse(fs.readFileSync('./test/source/basic_csv/corgis.csv', 'utf8'))
     }
   });
 });
@@ -46,7 +60,7 @@ it('should return object representing data two subdirectories deep', function() 
     others: {
       malamutes: JSON.parse(fs.readFileSync('./test/source/double_depth/others/malamutes.json', 'utf8')),
       outcasts: {
-        cats: JSON.parse(fs.readFileSync('./test/source/double_depth/others/outcasts/cats.json', 'utf8'))
+        cats: dsv.csv.parse(fs.readFileSync('./test/source/double_depth/others/outcasts/cats.csv', 'utf8'))
       }
     }
   });

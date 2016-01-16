@@ -4,6 +4,7 @@ const fs = require('fs');
 const glob = require('glob');
 const path = require('path');
 const yaml = require('js-yaml');
+const dsv = require('d3-dsv');
 
 
 function normalizePath (dir) {
@@ -19,7 +20,7 @@ function normalizePath (dir) {
 module.exports = function (rawDataDir) {
   const dataDir = normalizePath(rawDataDir);
   const depth = dataDir.split(path.sep).length - 1;
-  const files = glob.sync(dataDir + '**/*.{json,yaml,yml}');
+  const files = glob.sync(dataDir + '**/*.{json,yaml,yml,csv,tsv}');
 
   const payload = {};
 
@@ -27,13 +28,18 @@ module.exports = function (rawDataDir) {
     const extension = path.extname(file);
     const basename = path.basename(file, extension);
     const dir = path.normalize(path.dirname(file));
+    const fileContents = fs.readFileSync(file, 'utf8');
 
     let data;
 
     if (extension === '.json') {
-      data = JSON.parse(fs.readFileSync(file, 'utf8'));
+      data = JSON.parse(fileContents);
     } else if (extension === '.yaml' || extension === '.yml') {
-      data = yaml.safeLoad(fs.readFileSync(file, 'utf8'));
+      data = yaml.safeLoad(fileContents);
+    } else if (extension === '.csv') {
+      data = dsv.csv.parse(fileContents);
+    } else if (extension === '.tsv') {
+      data = dsv.tsv.parse(fileContents);
     } else {
       return;
     }

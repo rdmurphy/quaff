@@ -12,19 +12,26 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "coverage": "istanbul cover _mocha",
+    "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
   "keywords": [
     "data",
     "json",
     "yaml",
     "yml",
-    "csv"
+    "csv",
+    "tsv"
   ],
   "devDependencies": {
-    "mocha": "^2.2.1"
+    "coveralls": "^2.11.6",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.3.4",
+    "mocha-lcov-reporter": "^1.0.0"
   },
   "dependencies": {
+    "d3-dsv": "^0.1.13",
     "glob": "^6.0.4",
     "js-yaml": "^3.2.7"
   }
