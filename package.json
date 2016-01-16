@@ -1,7 +1,7 @@
 {
   "name": "quaff",
-  "version": "2.0.0-alpha",
-  "description": "Collect JSON/YAML/YML files from a source folder and convert them into a single object.",
+  "version": "2.0.0",
+  "description": "Collect JSON/YAML/YML/CSV/TSV files from a source folder and convert them into a single object.",
   "repository": "rdmurphy/quaff",
   "author": "Ryan Murphy <ryan@rdmurphy.org>",
   "license": "MIT",
