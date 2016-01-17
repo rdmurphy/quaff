@@ -8,6 +8,12 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 const dsv = require('d3-dsv');
 
+it('should normalize a trailing extra slash', function() {
+  assert.deepEqual(quaff('./test/source/basic_json/'), {
+    corgis: JSON.parse(fs.readFileSync('./test/source/basic_json/corgis.json', 'utf8'))
+  });
+});
+
 it('should return object generated from json', function() {
   assert.deepEqual(quaff('./test/source/basic_json'), {
     corgis: JSON.parse(fs.readFileSync('./test/source/basic_json/corgis.json', 'utf8'))

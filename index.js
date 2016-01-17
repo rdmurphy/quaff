@@ -8,10 +8,10 @@ const dsv = require('d3-dsv');
 
 
 function normalizePath (dir) {
-  const cleanDir = path.normalize(dir);
+  let cleanDir = path.normalize(dir);
 
   if (cleanDir.slice(-path.sep.length) !== path.sep) {
-    return cleanDir + path.sep;
+    cleanDir = cleanDir + path.sep;
   }
 
   return cleanDir;
@@ -38,10 +38,8 @@ module.exports = function (rawDataDir) {
       data = yaml.safeLoad(fileContents);
     } else if (extension === '.csv') {
       data = dsv.csv.parse(fileContents);
-    } else if (extension === '.tsv') {
-      data = dsv.tsv.parse(fileContents);
     } else {
-      return;
+      data = dsv.tsv.parse(fileContents);
     }
 
     let obj = payload;
