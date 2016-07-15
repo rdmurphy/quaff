@@ -31,8 +31,8 @@
     "mocha-lcov-reporter": "^1.0.0"
   },
   "dependencies": {
-    "d3-dsv": "^0.1.13",
-    "glob": "^6.0.4",
+    "d3-dsv": "^1.0.0",
+    "glob": "^7.0.5",
     "js-yaml": "^3.2.7"
   }
 }
