@@ -8,6 +8,14 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 const dsv = require('d3-dsv');
 
+it('should throw an error pointing to the invalid file', function() {
+  try {
+    quaff('./test/source/empty_file/');
+  } catch (e) {
+    assert.equal(e.message, 'Unexpected end of JSON input. Error in test/source/empty_file/empty.json.');
+  }
+});
+
 it('should normalize a trailing extra slash', function() {
   assert.deepEqual(quaff('./test/source/basic_json/'), {
     corgis: JSON.parse(fs.readFileSync('./test/source/basic_json/corgis.json', 'utf8'))

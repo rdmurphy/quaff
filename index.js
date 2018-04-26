@@ -25,36 +25,40 @@ module.exports = function (rawDataDir) {
   const payload = {};
 
   files.forEach(function (file) {
-    const extension = path.extname(file);
-    const basename = path.basename(file, extension);
-    const dir = path.normalize(path.dirname(file));
-    const fileContents = fs.readFileSync(file, 'utf8');
+    try {
+      const extension = path.extname(file);
+      const basename = path.basename(file, extension);
+      const dir = path.normalize(path.dirname(file));
+      const fileContents = fs.readFileSync(file, 'utf8');
 
-    let data;
+      let data;
 
-    if (extension === '.json') {
-      data = JSON.parse(fileContents);
-    } else if (extension === '.yaml' || extension === '.yml') {
-      data = yaml.safeLoad(fileContents);
-    } else if (extension === '.csv') {
-      data = dsv.csv.parse(fileContents);
-    } else {
-      data = dsv.tsv.parse(fileContents);
-    }
-
-    let obj = payload;
-
-    const dirs = dir.split(path.sep);
-    dirs.splice(0, depth); // dump the root dataDir
-
-    dirs.forEach(function (dir) {
-      if (!obj.hasOwnProperty(dir)) {
-        obj[dir] = {};
+      if (extension === '.json') {
+        data = JSON.parse(fileContents);
+      } else if (extension === '.yaml' || extension === '.yml') {
+        data = yaml.safeLoad(fileContents);
+      } else if (extension === '.csv') {
+        data = dsv.csv.parse(fileContents);
+      } else {
+        data = dsv.tsv.parse(fileContents);
       }
-      obj = obj[dir];
-    });
 
-    obj[basename] = data;
+      let obj = payload;
+
+      const dirs = dir.split(path.sep);
+      dirs.splice(0, depth); // dump the root dataDir
+
+      dirs.forEach(function (dir) {
+        if (!obj.hasOwnProperty(dir)) {
+          obj[dir] = {};
+        }
+        obj = obj[dir];
+      });
+
+      obj[basename] = data;
+    } catch (error) {
+      throw new Error(`${error.message}. Error in ${file}.`)
+    }
   });
 
   return payload;
