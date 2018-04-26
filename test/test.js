@@ -9,10 +9,13 @@ const yaml = require('js-yaml');
 const dsv = require('d3-dsv');
 
 it('should throw an error pointing to the invalid file', function() {
+  let errorMessage;
   try {
     quaff('./test/source/empty_file/');
-  } catch (e) {
-    assert.equal(e.message, 'Unexpected end of JSON input. Error in test/source/empty_file/empty.json.');
+  } catch (error) {
+    errorMessage = error.message;
+  } finally {
+    assert(errorMessage.indexOf('Error in test/source/empty_file/empty.json.'));
   }
 });
 
