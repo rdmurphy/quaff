@@ -9,7 +9,7 @@
     "index.js"
   ],
   "engines": {
-    "node": ">=4"
+    "node": ">=6"
   },
   "scripts": {
     "test": "mocha",
@@ -25,14 +25,33 @@
     "tsv"
   ],
   "devDependencies": {
-    "coveralls": "^2.11.6",
+    "coveralls": "^3.0.2",
+    "husky": "^1.1.1",
     "istanbul": "^0.4.2",
-    "mocha": "^3.0.1",
-    "mocha-lcov-reporter": "^1.0.0"
+    "mocha": "^5.2.0",
+    "mocha-lcov-reporter": "^1.0.0",
+    "precise-commits": "^1.0.2",
+    "prettier": "^1.14.3"
   },
   "dependencies": {
-    "d3-dsv": "^0.1.13",
-    "glob": "^6.0.4",
-    "js-yaml": "^3.2.7"
+    "d3-dsv": "^1.0.10",
+    "dset": "^2.0.1",
+    "fast-glob": "^2.2.3",
+    "js-yaml": "^3.12.0",
+    "parse-json": "^4.0.0"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "bracketSpacing": true,
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "es5"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "precise-commits"
+    }
   }
 }
