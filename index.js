@@ -1,60 +1,48 @@
-'use strict';
-
+// internal
 const fs = require('fs');
-const glob = require('glob');
 const path = require('path');
-const yaml = require('js-yaml');
+
+// packages
+const dset = require('dset');
 const dsv = require('d3-dsv');
+const glob = require('fast-glob');
+const parseJson = require('parse-json');
+const yaml = require('js-yaml');
 
-
-function normalizePath (dir) {
-  let cleanDir = path.normalize(dir);
-
-  if (cleanDir.slice(-path.sep.length) !== path.sep) {
-    cleanDir = cleanDir + path.sep;
-  }
-
-  return cleanDir;
-}
-
-module.exports = function (rawDataDir) {
-  const dataDir = normalizePath(rawDataDir);
-  const depth = dataDir.split(path.sep).length - 1;
-  const files = glob.sync(dataDir + '**/*.{json,yaml,yml,csv,tsv}');
+module.exports = function quaff(rawPath) {
+  const cwd = path.normalize(rawPath);
+  const depth = cwd.split(path.sep).length;
+  const files = glob.sync(path.join(cwd, '**/*.{json,yaml,yml,csv,tsv}'));
 
   const payload = {};
+  // const otherPayload = {};
 
-  files.forEach(function (file) {
-    const extension = path.extname(file);
-    const basename = path.basename(file, extension);
-    const dir = path.normalize(path.dirname(file));
+  files.forEach(function(file) {
+    const { name, dir, ext } = path.parse(file);
     const fileContents = fs.readFileSync(file, 'utf8');
 
     let data;
 
-    if (extension === '.json') {
-      data = JSON.parse(fileContents);
-    } else if (extension === '.yaml' || extension === '.yml') {
+    if (ext === '.json') {
+      data = parseJson(fileContents, file);
+    } else if (ext === '.yaml' || ext === '.yml') {
       data = yaml.safeLoad(fileContents);
-    } else if (extension === '.csv') {
-      data = dsv.csv.parse(fileContents);
+    } else if (ext === '.csv') {
+      data = dsv.csvParse(fileContents);
     } else {
-      data = dsv.tsv.parse(fileContents);
+      data = dsv.tsvParse(fileContents);
     }
 
-    let obj = payload;
+    // remove the leading path, split into a list, and filter out empty strings
+    const dirs = path
+      .relative(cwd, dir)
+      .split(path.sep)
+      .filter(Boolean);
 
-    const dirs = dir.split(path.sep);
-    dirs.splice(0, depth); // dump the root dataDir
+    // add the filename to the path part list
+    dirs.push(name);
 
-    dirs.forEach(function (dir) {
-      if (!obj.hasOwnProperty(dir)) {
-        obj[dir] = {};
-      }
-      obj = obj[dir];
-    });
-
-    obj[basename] = data;
+    dset(payload, dirs, data);
   });
 
   return payload;
