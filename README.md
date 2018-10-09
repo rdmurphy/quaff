@@ -14,7 +14,7 @@ Under the hood it uses JavaScript's built in [JSON support](https://developer.mo
 npm install quaff --save-dev
 ```
 
-Requires `node>=4`.
+Requires `node>=6`.
 
 ## Usage
 
