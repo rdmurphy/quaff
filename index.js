@@ -11,11 +11,9 @@ const yaml = require('js-yaml');
 
 module.exports = function quaff(rawPath) {
   const cwd = path.normalize(rawPath);
-  const depth = cwd.split(path.sep).length;
   const files = glob.sync(path.join(cwd, '**/*.{json,yaml,yml,csv,tsv}'));
 
   const payload = {};
-  // const otherPayload = {};
 
   files.forEach(function(file) {
     const { name, dir, ext } = path.parse(file);
