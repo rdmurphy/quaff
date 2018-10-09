@@ -1,7 +1,10 @@
 language: node_js
 node_js:
-  - '5'
-  - '4'
+  - '10'
+  - '9'
+  - '8'
+  - '7'
+  - '6'
 after_success:
   - npm run coverage
   - npm run coveralls
