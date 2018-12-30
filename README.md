@@ -1,6 +1,6 @@
 <p align="center">
   <img src="https://i.imgur.com/yC80ftQ.png" width="150" height="217" alt="quaff">
-  <br>
+  <br><br>
   <a href="https://www.npmjs.org/package/quaff"><img src="https://img.shields.io/npm/v/quaff.svg?style=flat" alt="npm"></a>
   <a href="https://travis-ci.org/rdmurphy/quaff"><img src="https://travis-ci.org/rdmurphy/quaff.svg?branch=master" alt="travis"></a>
   <a href="https://coveralls.io/github/rdmurphy/quaff?branch=master"><img src="https://coveralls.io/repos/rdmurphy/quaff/badge.svg?branch=master&service=github" alt="coveralls"></a>
