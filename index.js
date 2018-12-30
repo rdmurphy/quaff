@@ -5,13 +5,13 @@ const path = require('path');
 // packages
 const dset = require('dset');
 const dsv = require('d3-dsv');
-const glob = require('fast-glob');
+const glob = require('tiny-glob/sync');
 const parseJson = require('parse-json');
 const yaml = require('js-yaml');
 
 module.exports = function quaff(rawPath) {
   const cwd = path.normalize(rawPath);
-  const files = glob.sync(path.join(cwd, '**/*.{json,yaml,yml,csv,tsv}'));
+  const files = glob('**/*.{json,yaml,yml,csv,tsv}', { absolute: true, cwd });
 
   const payload = {};
 
