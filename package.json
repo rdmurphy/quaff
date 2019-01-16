@@ -9,7 +9,7 @@
     "index.js"
   ],
   "engines": {
-    "node": ">=6"
+    "node": ">=8"
   },
   "scripts": {
     "git-pre-commit": "precise-commits",
@@ -19,6 +19,7 @@
   },
   "keywords": [
     "data",
+    "javascript",
     "json",
     "yaml",
     "yml",
