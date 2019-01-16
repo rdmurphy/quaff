@@ -15,7 +15,7 @@
     "git-pre-commit": "precise-commits",
     "test": "mocha",
     "coverage": "nyc --reporter=html --reporter=text mocha",
-    "coveralls": "nyc report --reporter=text-lcov mocha | coveralls"
+    "coveralls": "nyc report --reporter=text-lcov | coveralls"
   },
   "keywords": [
     "data",
