@@ -12,9 +12,9 @@
 
 A data pipeline helper written in node that works similar to [Middleman](https://middlemanapp.com/)'s [Data Files](https://middlemanapp.com/advanced/data_files/) collector.
 
-Point the library at a folder filled with JSON, YAML, CSV and/or TSV files and get a JavaScript object back that reflects the folder's structure. Great for pulling data in to templates!
+Point the library at a folder filled with JS, AML ([ArchieML](http://archieml.org)), JSON, YAML, CSV and/or TSV files and get a JavaScript object back that reflects the folder's structure. Great for pulling data in to templates!
 
-Under the hood it uses JavaScript's built in [JSON support](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON), [`js-yaml`](https://github.com/nodeca/js-yaml) and [`d3-dsv`](https://github.com/d3/d3-dsv) to read files.
+Under the hood it uses [`parse-json`](https://github.com/sindresorhus/parse-json) (for better JSON error support), [`js-yaml`](https://github.com/nodeca/js-yaml) and [`d3-dsv`](https://github.com/d3/d3-dsv) to read files.
 
 ## Installation
 
@@ -42,7 +42,8 @@ After `require()`'ing `quaff`:
 
 ```js
 var quaff = require('quaff');
-var data = quaff('./data/');
+
+var data = await quaff('./data/');
 
 console.log(data);
 ```

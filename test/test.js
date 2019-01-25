@@ -5,6 +5,7 @@ const { promisify } = require('util');
 const readFile = promisify(fs.readFile);
 
 // packages
+const archieml = require('archieml');
 const assertRejects = require('assert-rejects');
 const dsv = require('d3-dsv');
 const yaml = require('js-yaml');
@@ -19,6 +20,8 @@ const readCsv = async filepath =>
   dsv.csvParse(await readFile(filepath, 'utf8'));
 const readTsv = async filepath =>
   dsv.tsvParse(await readFile(filepath, 'utf8'));
+const readArchieML = async filepath =>
+  archieml.load(await readFile(filepath, 'utf8'));
 
 it('should normalize a trailing extra slash', async () => {
   assert.deepStrictEqual(await quaff('./test/source/basic_json/'), {
@@ -116,5 +119,15 @@ it('should return what is exported from a JavaScript file (sync function)', asyn
 it('should return what is exported from a JavaScript file (async function)', async () => {
   assert.deepStrictEqual(await quaff('./test/source/async_js'), {
     corgis: await require('./source/async_js/corgis.js')(),
+  });
+});
+
+it('should return object generated from aml', async () => {
+  assert.deepStrictEqual(await quaff('./test/source/basic_aml'), {
+    corgis: await readArchieML('./test/source/basic_aml/corgis.aml'),
+  });
+
+  assert.deepStrictEqual(await quaff('./test/source/advanced_aml'), {
+    text: await readArchieML('./test/source/advanced_aml/text.aml'),
   });
 });

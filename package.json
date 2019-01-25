@@ -37,6 +37,7 @@
     "prettier": "^1.16.1"
   },
   "dependencies": {
+    "archieml": "^0.4.2",
     "d3-dsv": "^1.0.10",
     "dset": "^2.0.1",
     "js-yaml": "^3.12.1",

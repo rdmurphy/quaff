@@ -5,6 +5,7 @@ const { promisify } = require('util');
 const readFile = promisify(fs.readFile);
 
 // packages
+const archieml = require('archieml');
 const dset = require('dset');
 const dsv = require('d3-dsv');
 const glob = require('tiny-glob');
@@ -14,7 +15,7 @@ const yaml = require('js-yaml');
 module.exports = async function quaff(rawPath) {
   const cwd = path.normalize(rawPath);
 
-  const files = await glob('**/*.{js,json,yaml,yml,csv,tsv}', {
+  const files = await glob('**/*.{js,json,yaml,yml,csv,tsv,aml}', {
     absolute: true,
     cwd,
   });
@@ -46,9 +47,12 @@ module.exports = async function quaff(rawPath) {
         } else if (ext === '.csv') {
           // csv path
           data = dsv.csvParse(fileContents);
-        } else {
+        } else if (ext === '.tsv') {
           // tsv path
           data = dsv.tsvParse(fileContents);
+        } else {
+          // aml path
+          data = archieml.load(fileContents);
         }
       }
 
