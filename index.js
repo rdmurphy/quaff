@@ -13,6 +13,7 @@ const yaml = require('js-yaml');
 
 module.exports = async function quaff(rawPath) {
   const cwd = path.normalize(rawPath);
+
   const files = await glob('**/*.{js,json,yaml,yml,csv,tsv}', {
     absolute: true,
     cwd,
@@ -27,6 +28,7 @@ module.exports = async function quaff(rawPath) {
       let data;
 
       if (ext === '.js') {
+        // js path
         data = require(file);
 
         if (typeof data === 'function') {
@@ -36,12 +38,16 @@ module.exports = async function quaff(rawPath) {
         const fileContents = await readFile(file, 'utf8');
 
         if (ext === '.json') {
+          // json path
           data = parseJson(fileContents, file);
         } else if (ext === '.yaml' || ext === '.yml') {
+          // yaml path
           data = yaml.safeLoad(fileContents);
         } else if (ext === '.csv') {
+          // csv path
           data = dsv.csvParse(fileContents);
         } else {
+          // tsv path
           data = dsv.tsvParse(fileContents);
         }
       }
