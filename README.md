@@ -1,5 +1,10 @@
 <p align="center">
   <img src="https://i.imgur.com/yC80ftQ.png" width="150" height="217" alt="quaff">
+</p>
+<h1 align="center">
+  quaff
+</h1>
+<p align="center">
   <br><br>
   <a href="https://www.npmjs.org/package/quaff"><img src="https://img.shields.io/npm/v/quaff.svg?style=flat" alt="npm"></a>
   <a href="https://travis-ci.org/rdmurphy/quaff"><img src="https://travis-ci.org/rdmurphy/quaff.svg?branch=master" alt="travis"></a>
@@ -8,13 +13,11 @@
   <a href="https://packagephobia.now.sh/result?p=quaff"><img src="https://packagephobia.now.sh/badge?p=quaff" alt="install size"></a>
 </p>
 
-# quaff
+## Key features
 
-A data pipeline helper written in node that works similar to [Middleman](https://middlemanapp.com/)'s [Data Files](https://middlemanapp.com/advanced/data_files/) collector.
-
-Point the library at a folder filled with JS, AML ([ArchieML](http://archieml.org)), JSON, YAML, CSV and/or TSV files and get a JavaScript object back that reflects the folder's structure. Great for pulling data in to templates!
-
-Under the hood it uses [`parse-json`](https://github.com/sindresorhus/parse-json) (for better JSON error support), [`js-yaml`](https://github.com/nodeca/js-yaml) and [`d3-dsv`](https://github.com/d3/d3-dsv) to read files.
+- 🚚 A **data pipeline helper** written in Node.js that works similar to [Middleman](https://middlemanapp.com/)'s [Data Files](https://middlemanapp.com/advanced/data_files/) collector
+- 📦 Point the library at a folder filled with JS, AML ([ArchieML](http://archieml.org)), JSON, YAML, CSV and/or TSV files and **get a JavaScript object back that reflects the folder's structure and content/exports**
+- 🤓 Under the hood it uses [`parse-json`](https://github.com/sindresorhus/parse-json) (for better JSON error support), [`js-yaml`](https://github.com/nodeca/js-yaml) and [`d3-dsv`](https://github.com/d3/d3-dsv) to **read files efficently**
 
 ## Installation
 
@@ -22,7 +25,7 @@ Under the hood it uses [`parse-json`](https://github.com/sindresorhus/parse-json
 npm install quaff --save-dev
 ```
 
-Requires `node>=8`.
+`quaff` requires **Node.js 8 or later**.
 
 ## Usage
 
@@ -85,7 +88,7 @@ And the results...
 
 ## Advanced Usage with JavaScript files
 
-One of the biggest features added to `quaff` 4.0 is the ability to load JavaScript files. But how exactly does that work?
+One of the biggest features added in `quaff` 4.0 is the ability to load JavaScript files. But how exactly does that work?
 
 JavaScript files that are consumed by `quaff` have to follow one simple rule - they must export a default function (or value) at `module.exports`. All three of these are valid and return the same value:
 

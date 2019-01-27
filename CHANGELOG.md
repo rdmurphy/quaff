@@ -18,3 +18,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `quaff` now returns a **Promise** to enable async resolution of JavaScript files.
 - Moves testing to `nyc`.
+- Now requires Node.js **8 or later**.
