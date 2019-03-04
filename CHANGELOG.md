@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [4.1.0] - 2019-03-04
+
+### Added
+
+- Added TypeScript definition file.
+
+### Changed
+
+- Some housekeeping in `index.js`, but no functional changes.
+
 ## [4.0.0] - 2019-01-25
 
 ### Added
