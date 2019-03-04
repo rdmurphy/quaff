@@ -2,6 +2,8 @@
   "name": "quaff",
   "version": "4.0.0",
   "description": "Collect JSON/YAML/YML/CSV/TSV files from a source folder and convert them into a single object.",
+  "main": "index.js",
+  "types": "types.d.ts",
   "repository": "rdmurphy/quaff",
   "author": "Ryan Murphy <ryan@rdmurphy.org>",
   "license": "MIT",
@@ -27,6 +29,7 @@
     "tsv"
   ],
   "devDependencies": {
+    "@types/node": "^11.10.4",
     "@zeit/git-hooks": "^0.1.4",
     "assert-rejects": "^1.0.0",
     "coveralls": "^3.0.2",
