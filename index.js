@@ -38,21 +38,28 @@ module.exports = async function quaff(rawPath) {
       } else {
         const fileContents = await readFile(file, 'utf8');
 
-        if (ext === '.json') {
+        switch (ext) {
           // json path
-          data = parseJson(fileContents, file);
-        } else if (ext === '.yaml' || ext === '.yml') {
-          // yaml path
-          data = yaml.safeLoad(fileContents);
-        } else if (ext === '.csv') {
+          case '.json':
+            data = parseJson(fileContents, file);
+            break;
+          // yaml paths
+          case '.yaml':
+          case '.yml':
+            data = yaml.safeLoad(fileContents);
+            break;
           // csv path
-          data = dsv.csvParse(fileContents);
-        } else if (ext === '.tsv') {
+          case '.csv':
+            data = dsv.csvParse(fileContents);
+            break;
           // tsv path
-          data = dsv.tsvParse(fileContents);
-        } else {
+          case '.tsv':
+            data = dsv.tsvParse(fileContents);
+            break;
           // aml path
-          data = archieml.load(fileContents);
+          case '.aml':
+            data = archieml.load(fileContents);
+            break;
         }
       }
 
