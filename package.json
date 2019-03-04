@@ -32,18 +32,18 @@
     "@types/node": "^11.10.4",
     "@zeit/git-hooks": "^0.1.4",
     "assert-rejects": "^1.0.0",
-    "coveralls": "^3.0.2",
-    "mocha": "^5.2.0",
+    "coveralls": "^3.0.3",
+    "mocha": "^6.0.2",
     "mocha-lcov-reporter": "^1.0.0",
     "nyc": "^13.3.0",
     "precise-commits": "^1.0.2",
-    "prettier": "^1.16.1"
+    "prettier": "^1.16.4"
   },
   "dependencies": {
     "archieml": "^0.4.2",
-    "d3-dsv": "^1.0.10",
+    "d3-dsv": "^1.1.1",
     "dset": "^2.0.1",
-    "js-yaml": "^3.12.1",
+    "js-yaml": "^3.12.2",
     "parse-json": "^4.0.0",
     "tiny-glob": "^0.2.6"
   },
