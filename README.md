@@ -17,7 +17,7 @@
 
 - 🚚 A **data pipeline helper** written in Node.js that works similar to [Middleman](https://middlemanapp.com/)'s [Data Files](https://middlemanapp.com/advanced/data_files/) collector
 - 📦 Point the library at a folder filled with JS, AML ([ArchieML](http://archieml.org)), JSON, YAML, CSV and/or TSV files and **get a JavaScript object back that reflects the folder's structure and content/exports**
-- 🤓 Under the hood it uses [`parse-json`](https://github.com/sindresorhus/parse-json) (for better JSON error support), [`js-yaml`](https://github.com/nodeca/js-yaml) and [`d3-dsv`](https://github.com/d3/d3-dsv) to **read files efficently**
+- 🤓 Under the hood it uses [`parse-json`](https://github.com/sindresorhus/parse-json) (for better JSON error support), [`js-yaml`](https://github.com/nodeca/js-yaml) and [`d3-dsv`](https://github.com/d3/d3-dsv) to **read files efficiently**
 
 ## Installation
 
