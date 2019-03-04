@@ -8,7 +8,8 @@
   "author": "Ryan Murphy <ryan@rdmurphy.org>",
   "license": "MIT",
   "files": [
-    "index.js"
+    "index.js",
+    "types.d.ts"
   ],
   "engines": {
     "node": ">=8"
@@ -17,7 +18,8 @@
     "git-pre-commit": "precise-commits",
     "test": "mocha",
     "coverage": "nyc --reporter=html --reporter=text mocha",
-    "coveralls": "nyc report --reporter=text-lcov | coveralls"
+    "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "release": "np --no-yarn"
   },
   "keywords": [
     "data",
@@ -35,6 +37,7 @@
     "coveralls": "^3.0.3",
     "mocha": "^6.0.2",
     "mocha-lcov-reporter": "^1.0.0",
+    "np": "*",
     "nyc": "^13.3.0",
     "precise-commits": "^1.0.2",
     "prettier": "^1.16.4"
