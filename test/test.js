@@ -67,29 +67,26 @@ it('should ignore files that do not match filters', async () => {
 
 it('should return object representing data one subdirectory deep', async () => {
   assert.deepStrictEqual(await quaff('./test/source/single_depth'), {
-    corgis: await readJson('./test/source/single_depth/corgis.json', 'utf8'),
+    corgis: await readJson('./test/source/single_depth/corgis.json'),
     others: {
       malamutes: await readJson(
-        './test/source/single_depth/others/malamutes.json',
-        'utf8'
+        './test/source/single_depth/others/malamutes.json'
       ),
-      corgis: await readCsv('./test/source/basic_csv/corgis.csv', 'utf8'),
+      corgis: await readCsv('./test/source/basic_csv/corgis.csv'),
     },
   });
 });
 
 it('should return object representing data two subdirectories deep', async () => {
   assert.deepStrictEqual(await quaff('./test/source/double_depth'), {
-    corgis: await readJson('./test/source/double_depth/corgis.json', 'utf8'),
+    corgis: await readJson('./test/source/double_depth/corgis.json'),
     others: {
       malamutes: await readJson(
-        './test/source/double_depth/others/malamutes.json',
-        'utf8'
+        './test/source/double_depth/others/malamutes.json'
       ),
       outcasts: {
         cats: await readCsv(
-          './test/source/double_depth/others/outcasts/cats.csv',
-          'utf8'
+          './test/source/double_depth/others/outcasts/cats.csv'
         ),
       },
     },
