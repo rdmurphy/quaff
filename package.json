@@ -38,7 +38,7 @@
     "mocha": "^6.0.2",
     "mocha-lcov-reporter": "^1.0.0",
     "np": "*",
-    "nyc": "^14.1.1",
+    "nyc": "^15.0.0",
     "precise-commits": "^1.0.2",
     "prettier": "^1.16.4"
   },
