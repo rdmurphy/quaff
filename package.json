@@ -35,7 +35,7 @@
     "@zeit/git-hooks": "^0.1.4",
     "assert-rejects": "^1.0.0",
     "coveralls": "^3.0.3",
-    "mocha": "^6.0.2",
+    "mocha": "^7.0.0",
     "mocha-lcov-reporter": "^1.0.0",
     "np": "*",
     "nyc": "^15.0.0",
