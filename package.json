@@ -40,7 +40,7 @@
     "np": "*",
     "nyc": "^15.0.0",
     "precise-commits": "^1.0.2",
-    "prettier": "^1.16.4"
+    "prettier": "^2.0.4"
   },
   "dependencies": {
     "archieml": "^0.4.2",
