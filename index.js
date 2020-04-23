@@ -1,8 +1,6 @@
 // internal
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
-const { promisify } = require('util');
-const readFile = promisify(fs.readFile);
 
 // packages
 const archieml = require('archieml');
@@ -36,7 +34,7 @@ module.exports = async function quaff(rawPath) {
           data = await data();
         }
       } else {
-        const fileContents = await readFile(file, 'utf8');
+        const fileContents = await fs.readFile(file, 'utf8');
 
         switch (ext) {
           // json path
