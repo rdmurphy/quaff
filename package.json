@@ -12,7 +12,7 @@
     "types.d.ts"
   ],
   "engines": {
-    "node": ">=8"
+    "node": ">=10"
   },
   "scripts": {
     "git-pre-commit": "precise-commits",
