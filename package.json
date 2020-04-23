@@ -31,18 +31,19 @@
     "tsv"
   ],
   "devDependencies": {
-    "@types/node": "^13.1.0",
+    "@types/node": "^13.13.2",
     "@zeit/git-hooks": "^0.1.4",
     "assert-rejects": "^1.0.0",
-    "coveralls": "^3.0.3",
+    "coveralls": "^3.0.13",
     "mocha": "^7.0.0",
     "mocha-lcov-reporter": "^1.0.0",
-    "np": "*",
+    "np": "^6.2.1",
     "nyc": "^15.0.0",
     "precise-commits": "^1.0.2",
-    "prettier": "^1.16.4"
+    "prettier": "^2.0.5"
   },
   "dependencies": {
+    "@newswire/prettier-config": "^3.0.0",
     "archieml": "^0.4.2",
     "d3-dsv": "^1.1.1",
     "dset": "^2.0.1",
@@ -50,13 +51,5 @@
     "parse-json": "^5.0.0",
     "tiny-glob": "^0.2.6"
   },
-  "prettier": {
-    "arrowParens": "avoid",
-    "bracketSpacing": true,
-    "printWidth": 80,
-    "semi": true,
-    "singleQuote": true,
-    "tabWidth": 2,
-    "trailingComma": "es5"
-  }
+  "prettier": "@newswire/prettier-config"
 }
