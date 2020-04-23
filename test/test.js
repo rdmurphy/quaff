@@ -1,27 +1,25 @@
 // native
 const assert = require('assert');
-const fs = require('fs');
-const { promisify } = require('util');
-const readFile = promisify(fs.readFile);
+const fs = require('fs').promises;
 
 // packages
 const archieml = require('archieml');
-const assertRejects = require('assert-rejects');
 const dsv = require('d3-dsv');
 const yaml = require('js-yaml');
 
 // internal
 const quaff = require('..');
 
-const readJson = async filepath => JSON.parse(await readFile(filepath, 'utf8'));
-const readYaml = async filepath =>
-  yaml.safeLoad(await readFile(filepath, 'utf8'));
-const readCsv = async filepath =>
-  dsv.csvParse(await readFile(filepath, 'utf8'));
-const readTsv = async filepath =>
-  dsv.tsvParse(await readFile(filepath, 'utf8'));
-const readArchieML = async filepath =>
-  archieml.load(await readFile(filepath, 'utf8'));
+const readJson = async (filepath) =>
+  JSON.parse(await fs.readFile(filepath, 'utf8'));
+const readYaml = async (filepath) =>
+  yaml.safeLoad(await fs.readFile(filepath, 'utf8'));
+const readCsv = async (filepath) =>
+  dsv.csvParse(await fs.readFile(filepath, 'utf8'));
+const readTsv = async (filepath) =>
+  dsv.tsvParse(await fs.readFile(filepath, 'utf8'));
+const readArchieML = async (filepath) =>
+  archieml.load(await fs.readFile(filepath, 'utf8'));
 
 it('should normalize a trailing extra slash', async () => {
   assert.deepStrictEqual(await quaff('./test/source/basic_json/'), {
@@ -94,11 +92,11 @@ it('should return object representing data two subdirectories deep', async () =>
 });
 
 it('should throw an error when attempting to load empty JSON', () => {
-  assertRejects(quaff('./test/source/basic_json_empty'), /JSONError/);
+  assert.rejects(quaff('./test/source/basic_json_empty'), /JSONError/);
 });
 
 it('should throw an error when attempting to load bad JSON', () => {
-  assertRejects(quaff('./test/source/basic_json_error'), /JSONError/);
+  assert.rejects(quaff('./test/source/basic_json_error'), /JSONError/);
 });
 
 it('should return what is exported from a JavaScript file (no function)', async () => {

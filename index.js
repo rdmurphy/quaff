@@ -1,8 +1,6 @@
 // internal
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
-const { promisify } = require('util');
-const readFile = promisify(fs.readFile);
 
 // packages
 const archieml = require('archieml');
@@ -23,7 +21,7 @@ module.exports = async function quaff(rawPath) {
   const payload = {};
 
   await Promise.all(
-    files.map(async function(file) {
+    files.map(async function (file) {
       const { name, dir, ext } = path.parse(file);
 
       let data;
@@ -36,7 +34,7 @@ module.exports = async function quaff(rawPath) {
           data = await data();
         }
       } else {
-        const fileContents = await readFile(file, 'utf8');
+        const fileContents = await fs.readFile(file, 'utf8');
 
         switch (ext) {
           // json path
@@ -64,10 +62,7 @@ module.exports = async function quaff(rawPath) {
       }
 
       // remove the leading path, split into a list, and filter out empty strings
-      const dirs = path
-        .relative(cwd, dir)
-        .split(path.sep)
-        .filter(Boolean);
+      const dirs = path.relative(cwd, dir).split(path.sep).filter(Boolean);
 
       // add the filename to the path part list
       dirs.push(name);
