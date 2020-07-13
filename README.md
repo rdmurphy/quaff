@@ -56,33 +56,33 @@ And the results...
 
 ```json
 {
-  "mammals": {
-    "cats": ["Marty", "Sammy"],
-    "dogs": ["Snazzy", "Cally"],
-    "bears": [
-      {
-        "name": "Steve",
-        "type": "Polar bear"
-      },
-      {
-        "name": "Angelica",
-        "type": "Sun bear"
-      }
-    ]
-  },
-  "birds": {
-    "parrots": {
-      "alive": ["Buzz"],
-      "dead": ["Moose"]
-    },
-    "story": {
-      "title": "All about birds",
-      "prose": [
-        { "type": "text", "value": "Do you know how great birds are?" },
-        { "type": "text", "value": "Come with me on this journey." }
-      ]
-    }
-  }
+	"mammals": {
+		"cats": ["Marty", "Sammy"],
+		"dogs": ["Snazzy", "Cally"],
+		"bears": [
+			{
+				"name": "Steve",
+				"type": "Polar bear"
+			},
+			{
+				"name": "Angelica",
+				"type": "Sun bear"
+			}
+		]
+	},
+	"birds": {
+		"parrots": {
+			"alive": ["Buzz"],
+			"dead": ["Moose"]
+		},
+		"story": {
+			"title": "All about birds",
+			"prose": [
+				{ "type": "text", "value": "Do you know how great birds are?" },
+				{ "type": "text", "value": "Come with me on this journey." }
+			]
+		}
+	}
 }
 ```
 
@@ -94,28 +94,28 @@ JavaScript files that are consumed by `quaff` have to follow one simple rule - t
 
 ```js
 module.exports = [
-  {
-    name: 'Pudge',
-    instagram: 'https://instagram.com/pudgethecorgi/',
-  },
+	{
+		name: 'Pudge',
+		instagram: 'https://instagram.com/pudgethecorgi/',
+	},
 ];
 ```
 
 ```js
 module.exports = () => [
-  {
-    name: 'Pudge',
-    instagram: 'https://instagram.com/pudgethecorgi/',
-  },
+	{
+		name: 'Pudge',
+		instagram: 'https://instagram.com/pudgethecorgi/',
+	},
 ];
 ```
 
 ```js
 module.exports = async () => [
-  {
-    name: 'Pudge',
-    instagram: 'https://instagram.com/pudgethecorgi/',
-  },
+	{
+		name: 'Pudge',
+		instagram: 'https://instagram.com/pudgethecorgi/',
+	},
 ];
 ```
 
@@ -125,11 +125,11 @@ The final example above is the most interesting one - `async` functions are supp
 const fetch = require('node-fetch');
 
 module.exports = async () => {
-  const res = await fetch('https://my-cool-api/');
-  const data = await res.json();
+	const res = await fetch('https://my-cool-api/');
+	const data = await res.json();
 
-  // whatever the API returned will be added to the quaff object!
-  return data;
+	// whatever the API returned will be added to the quaff object!
+	return data;
 };
 ```
 
@@ -139,14 +139,14 @@ Don't have a `Promise` to do async work with? Working with a callback interface?
 const apiHelper = require('my-callback-api');
 
 module.exports = () => {
-  return new Promise((resolve, reject) => {
-    apiHelper('people', (err, data) => {
-      if (err) return reject(err);
+	return new Promise((resolve, reject) => {
+		apiHelper('people', (err, data) => {
+			if (err) return reject(err);
 
-      // quaff will take it from here!
-      resolve(data);
-    });
-  });
+			// quaff will take it from here!
+			resolve(data);
+		});
+	});
 };
 ```
 
