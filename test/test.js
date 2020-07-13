@@ -95,14 +95,14 @@ it('should return object representing data two subdirectories deep', async () =>
 it('should throw an error when attempting to load empty JSON', async () => {
 	await assert.rejects(quaff('./test/source/basic_json_empty'), {
 		name: 'JSONError',
-		message: /Unexpected end of JSON input/,
+		message: /^Unexpected end of JSON input/,
 	});
 });
 
 it('should throw an error when attempting to load bad JSON', async () => {
 	await assert.rejects(quaff('./test/source/basic_json_error'), {
 		name: 'JSONError',
-		message: /Unexpected token }/,
+		message: /^Unexpected token }/,
 	});
 });
 
