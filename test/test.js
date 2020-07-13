@@ -92,12 +92,18 @@ it('should return object representing data two subdirectories deep', async () =>
 	});
 });
 
-it('should throw an error when attempting to load empty JSON', () => {
-	assert.rejects(quaff('./test/source/basic_json_empty'), /JSONError/);
+it('should throw an error when attempting to load empty JSON', async () => {
+	await assert.rejects(quaff('./test/source/basic_json_empty'), {
+		name: 'JSONError',
+		message: /Unexpected end of JSON input/,
+	});
 });
 
-it('should throw an error when attempting to load bad JSON', () => {
-	assert.rejects(quaff('./test/source/basic_json_error'), /JSONError/);
+it('should throw an error when attempting to load bad JSON', async () => {
+	await assert.rejects(quaff('./test/source/basic_json_error'), {
+		name: 'JSONError',
+		message: /Unexpected token }/,
+	});
 });
 
 it('should return what is exported from a JavaScript file (no function)', async () => {
@@ -125,6 +131,13 @@ it('should return object generated from aml', async () => {
 
 	assert.deepStrictEqual(await quaff('./test/source/advanced_aml'), {
 		text: await readArchieML('./test/source/advanced_aml/text.aml'),
+	});
+});
+
+it('should throw an error if a file key is reused', async () => {
+	await assert.rejects(quaff('./test/source/duplicate_keys'), {
+		name: 'Error',
+		message: /^More than one file has attempted/,
 	});
 });
 
