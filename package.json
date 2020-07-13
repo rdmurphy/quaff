@@ -46,7 +46,6 @@
     "dset": "^2.0.1",
     "js-yaml": "^3.14.0",
     "parse-json": "^5.0.0",
-    "tiny-glob": "^0.2.6",
     "totalist": "^1.1.0"
   },
   "prettier": "@rdm/prettier-config"
