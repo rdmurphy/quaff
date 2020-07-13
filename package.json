@@ -30,13 +30,13 @@
     "tsv"
   ],
   "devDependencies": {
-    "@types/node": "^14.0.1",
+    "@types/node": "^14.0.22",
     "@zeit/git-hooks": "^0.1.4",
-    "coveralls": "^3.0.13",
+    "coveralls": "^3.1.0",
     "mocha": "^8.0.1",
     "mocha-lcov-reporter": "^1.0.0",
-    "np": "^6.2.1",
-    "nyc": "^15.0.1",
+    "np": "^6.3.2",
+    "nyc": "^15.1.0",
     "precise-commits": "^1.0.2",
     "prettier": "^2.0.5"
   },
@@ -45,7 +45,7 @@
     "archieml": "^0.4.2",
     "d3-dsv": "^1.1.1",
     "dset": "^2.0.1",
-    "js-yaml": "^3.12.2",
+    "js-yaml": "^3.14.0",
     "parse-json": "^5.0.0",
     "tiny-glob": "^0.2.6"
   },
