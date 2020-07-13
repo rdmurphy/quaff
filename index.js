@@ -77,7 +77,7 @@ module.exports = async function quaff(rawPath) {
 				// yaml paths
 				case '.yaml':
 				case '.yml':
-					data = yaml.safeLoad(fileContents);
+					data = yaml.safeLoad(fileContents, { filename: abs });
 					break;
 				// csv path
 				case '.csv':
