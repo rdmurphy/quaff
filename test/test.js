@@ -137,7 +137,7 @@ it('should return object generated from aml', async () => {
 it('should throw an error if a file key is reused', async () => {
 	await assert.rejects(quaff('./test/source/duplicate_keys'), {
 		name: 'Error',
-		message: /^More than one file has attempted/,
+		message: /^More than one file attempted/,
 	});
 });
 

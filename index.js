@@ -48,7 +48,7 @@ module.exports = async function quaff(rawPath) {
 		// if this key isn't unique, throw an error
 		if (existing.has(key)) {
 			throw new Error(
-				`More than one file has attempted to use "${key}" as its path. This is caused by having multiple files in a directory with the same name but different extensions.`,
+				`More than one file attempted to use "${key}" as its path. This error is caused by having multiple files in a directory with the same name but different extensions.`,
 			);
 		}
 
