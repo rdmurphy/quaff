@@ -106,6 +106,13 @@ it('should throw an error when attempting to load bad JSON', async () => {
 	});
 });
 
+it('should throw an error when attempting to load bad YAML', async () => {
+	await assert.rejects(quaff('./test/source/basic_yaml_error'), {
+		name: 'YAMLException',
+		message: /^end of the stream or a document separator is expected/,
+	});
+});
+
 it('should return what is exported from a JavaScript file (no function)', async () => {
 	assert.deepStrictEqual(await quaff('./test/source/basic_js'), {
 		corgis: require('./source/basic_js/corgis.js'),
