@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `quaff` will now throw an error when an two input files attempt to use the same output key. This is caused by having multiple files in a directory with the same name but different extensions.
+- When a `.yaml` or `.yml` file fails to parse the thrown error will now include the file path.
+
+### Changed
+
+- `tiny-glob` has been replaced with [`totalist`](https://github.com/lukeed/totalist), which makes quaff a little faster at iterating through files.
+- All tests have been moved to [`uvu`](https://github.com/lukeed/uvu).
+
 ## [4.1.0] - 2019-03-04
 
 ### Added
