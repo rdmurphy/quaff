@@ -16,7 +16,7 @@
   },
   "scripts": {
     "git-pre-commit": "precise-commits",
-    "test": "uvu --ignore test/source",
+    "test": "node test/test.js",
     "coverage": "nyc --reporter text --reporter lcovonly npm run test",
     "release": "np --no-yarn"
   },
