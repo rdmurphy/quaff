@@ -4,18 +4,20 @@ on: push
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    name: Node.js v${{ matrix.nodejs }} (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
-        node-version: ["10", "12", "14"]
+        node-version: [10, 12, 14]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
 
     steps:
       - name: Checkout the repo
         uses: actions/checkout@v2
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Use Node.js v${{ matrix.node-version }}
         uses: actions/setup-node@v2-beta
         with:
           node-version: ${{ matrix.node-version }}
@@ -37,7 +39,7 @@ jobs:
       - name: Coverage
         uses: coverallsapp/github-action@master
         env:
-          COVERALLS_FLAG_NAME: ${{ matrix.node-version }}
+          COVERALLS_FLAG_NAME: v${{ matrix.node-version }}-${{ runner.os }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel: true
