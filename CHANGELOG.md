@@ -9,8 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `quaff` will now throw an error when an two input files attempt to use the same output key. This is caused by having multiple files in a directory with the same name but different extensions.
+- `quaff` will now throw an error when more than one input file attempts to use the same output key. This is caused by having multiple files in a directory with the same name but different extensions.
 - When a `.yaml` or `.yml` file fails to parse the thrown error will now include the file path.
+- We are now testing `quaff` in MacOS and Windows thanks to GitHub Actions. Don't expect that'll ever be an issue good to know for sure.
 
 ### Changed
 
