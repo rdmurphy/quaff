@@ -1,7 +1,7 @@
 {
   "name": "quaff",
   "version": "4.1.0",
-  "description": "Collect JSON/YAML/YML/CSV/TSV files from a source folder and convert them into a single object.",
+  "description": "Collect JS/JSON/YAML/YML/CSV/TSV/ArchieML files from a source folder and convert them into a single object.",
   "main": "index.js",
   "types": "types.d.ts",
   "repository": "rdmurphy/quaff",
