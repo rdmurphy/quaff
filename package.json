@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "archieml": "^0.4.2",
-    "d3-dsv": "^1.1.1",
+    "d3-dsv": "^2.0.0",
     "dset": "^2.0.1",
     "js-yaml": "^3.14.0",
     "parse-json": "^5.0.0",
