@@ -7,7 +7,7 @@ const archieml = require('archieml');
 const dset = require('dset');
 const dsv = require('d3-dsv');
 const parseJson = require('parse-json');
-const totalist = require('totalist');
+const { totalist } = require('totalist');
 const yaml = require('js-yaml');
 
 module.exports = async function quaff(rawPath) {
