@@ -102,7 +102,7 @@ it('should throw an error when attempting to load empty JSON', async () => {
 it('should throw an error when attempting to load bad JSON', async () => {
 	await assert.rejects(quaff('./test/source/basic_json_error'), {
 		name: 'JSONError',
-		message: /^Unexpected token }/,
+		message: /^Unexpected token "}"/,
 	});
 });
 
