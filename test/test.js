@@ -2,6 +2,7 @@
 const { test: it } = require('uvu');
 const assert = require('assert').strict;
 const fs = require('fs').promises;
+const path = require('path');
 
 // packages
 const archieml = require('archieml');
@@ -146,6 +147,20 @@ it('should throw an error if a file key is reused', async () => {
 		name: 'Error',
 		message: /^More than one file attempted/,
 	});
+});
+
+it('should have a non-enumerable value under __file__', async () => {
+	const data = await quaff('./test/source/basic_json/');
+	const expected = await readJson('./test/source/basic_json/corgis.json');
+
+	assert.deepStrictEqual(data, {
+		corgis: expected,
+	});
+
+	assert.strictEqual(
+		data.corgis.__file__,
+		path.resolve(__dirname, '../test/source/basic_json/corgis.json'),
+	);
 });
 
 it.run();

@@ -94,6 +94,9 @@ module.exports = async function quaff(rawPath) {
 			}
 		}
 
+		// add the file path as a non-iterative field
+		Object.defineProperty(data, '__file__', { value: abs });
+
 		dset(output, dirs, data);
 	});
 
