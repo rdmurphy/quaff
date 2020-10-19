@@ -10,7 +10,7 @@ const parseJson = require('parse-json');
 const { totalist } = require('totalist');
 const yaml = require('js-yaml');
 
-module.exports = async function quaff(rawPath) {
+module.exports = async function quaff(rawPath, onEach) {
 	const validExtensions = [
 		'.js',
 		'.json',
@@ -30,8 +30,8 @@ module.exports = async function quaff(rawPath) {
 	// a set to watch out for duplicate keys
 	const existing = new Set();
 
-	await totalist(cwd, async (rel, abs) => {
-		const { name, dir, ext } = path.parse(rel);
+	await totalist(cwd, async (relative, absolute) => {
+		const { name, dir, ext } = path.parse(relative);
 
 		// early exit if not a valid extension
 		if (!validExtensions.includes(ext)) return;
@@ -60,24 +60,24 @@ module.exports = async function quaff(rawPath) {
 		// we give JavaScript entries a special treatment
 		if (ext === '.js') {
 			// js path
-			data = require(abs);
+			data = require(absolute);
 
 			if (typeof data === 'function') {
 				data = await data();
 			}
 		} else {
 			// otherwise look for matches
-			const fileContents = await fs.readFile(abs, 'utf8');
+			const fileContents = await fs.readFile(absolute, 'utf8');
 
 			switch (ext) {
 				// json path
 				case '.json':
-					data = parseJson(fileContents, abs);
+					data = parseJson(fileContents, absolute);
 					break;
 				// yaml paths
 				case '.yaml':
 				case '.yml':
-					data = yaml.safeLoad(fileContents, { filename: abs });
+					data = yaml.safeLoad(fileContents, { filename: absolute });
 					break;
 				// csv path
 				case '.csv':
@@ -95,9 +95,13 @@ module.exports = async function quaff(rawPath) {
 		}
 
 		// add the file path as a non-iterative field
-		Object.defineProperty(data, '__file__', { value: abs });
+		Object.defineProperty(data, '__file__', { value: absolute });
 
-		dset(output, dirs, data);
+		dset(
+			output,
+			dirs,
+			onEach ? onEach({ absolute, object: data, relative }) : data,
+		);
 	});
 
 	return output;

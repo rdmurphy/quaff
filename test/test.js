@@ -163,4 +163,26 @@ it('should have a non-enumerable value under __file__', async () => {
 	);
 });
 
+it('should pass each found file through the onEach callback if provided', async () => {
+	let wasAccessed = false;
+
+	const data = await quaff('./test/source/double_depth/', ({ object }) => {
+		return new Proxy(object, {
+			get(_, prop) {
+				wasAccessed = true;
+				console.log(prop);
+			},
+		});
+	});
+
+	// assert it hasn't been accessed yet
+	assert.ok(!wasAccessed);
+
+	// tap it
+	console.log(data.others.malamutes.name);
+
+	// assert it was called
+	assert.ok(wasAccessed);
+});
+
 it.run();
