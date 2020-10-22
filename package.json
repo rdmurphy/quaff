@@ -4,7 +4,14 @@
   "description": "Collect JS/JSON/YAML/YML/CSV/TSV/ArchieML files from a source folder and convert them into a single object.",
   "main": "index.js",
   "types": "types.d.ts",
-  "repository": "rdmurphy/quaff",
+  "exports": {
+    "import": "./wrapper.mjs",
+    "require": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rdmurphy/quaff.git"
+  },
   "author": "Ryan Murphy <ryan@rdmurphy.org>",
   "license": "MIT",
   "files": [
