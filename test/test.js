@@ -14,7 +14,7 @@ const quaff = require('..');
 const readJson = async (filepath) =>
 	JSON.parse(await fs.readFile(filepath, 'utf8'));
 const readYaml = async (filepath) =>
-	yaml.safeLoad(await fs.readFile(filepath, 'utf8'));
+	yaml.load(await fs.readFile(filepath, 'utf8'));
 const readCsv = async (filepath) =>
 	dsv.csvParse(await fs.readFile(filepath, 'utf8'));
 const readTsv = async (filepath) =>
