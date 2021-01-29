@@ -4,7 +4,7 @@ const path = require('path');
 
 // packages
 const archieml = require('archieml');
-const dset = require('dset');
+const { dset } = require('dset');
 const dsv = require('d3-dsv');
 const parseJson = require('parse-json');
 const { totalist } = require('totalist');
