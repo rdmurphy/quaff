@@ -1,2 +1,4 @@
 import quaff from './index.js';
-export default quaff;
+
+export const quaff = quaff.quaff;
+export const quaffFile = quaff.quaffFile;

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- The `quaff` file processor is now available at `quaffFile`. This makes it possible to tap into all of `quaff`'s processors to load a single file. The (now) named `quaff` export works the same as before but uses the new `quaffFile` behind the scenes.
+
+### Changed
+- `quaff` no longer has a default export and now uses two named exports - `quaff` and `quaffFile`.
+
 ## [4.2.0] - 2020-07-16
 
 ### Added

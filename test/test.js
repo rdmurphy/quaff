@@ -9,7 +9,7 @@ const dsv = require('d3-dsv');
 const yaml = require('js-yaml');
 
 // internal
-const quaff = require('..');
+const { quaff, quaffFile } = require('..');
 
 const readJson = async (filepath) =>
 	JSON.parse(await fs.readFile(filepath, 'utf8'));
@@ -145,6 +145,18 @@ it('should throw an error if a file key is reused', async () => {
 	await assert.rejects(quaff('./test/source/duplicate_keys'), {
 		name: 'Error',
 		message: /^More than one file attempted/,
+	});
+});
+
+it('should be possible to read a file directly with quaffFile', async () => {
+	const filePath = './test/source/basic_json/corgis.json';
+	assert.deepStrictEqual(await quaffFile(filePath), await readJson(filePath));
+});
+
+it('should throw an error if a non-valid extension is passed to quaffFile', async () => {
+	await assert.rejects(quaffFile('./test/source/non_match_file/corgis.txt'), {
+		name: 'Error',
+		message: /^Unable to parse/,
 	});
 });
 

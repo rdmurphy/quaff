@@ -10,19 +10,80 @@ const parseJson = require('parse-json');
 const { totalist } = require('totalist');
 const yaml = require('js-yaml');
 
-module.exports = async function quaff(rawPath) {
-	const validExtensions = [
-		'.js',
-		'.json',
-		'.yaml',
-		'.yml',
-		'.csv',
-		'.tsv',
-		'.aml',
-	];
+/**
+ * quaff's valid extensions.
+ * @type {string[]}
+ */
+const validExtensions = [
+	'.js',
+	'.json',
+	'.yaml',
+	'.yml',
+	'.csv',
+	'.tsv',
+	'.aml',
+];
 
+/**
+ * @param {string} filePath the input file path
+ * @returns {Promise<unknown>}
+ */
+async function quaffFile(filePath) {
+	const ext = path.extname(filePath);
+
+	let data;
+
+	// we give JavaScript entries a special treatment
+	if (ext === '.js') {
+		// js path
+		data = require(filePath);
+
+		if (typeof data === 'function') {
+			data = await data();
+		}
+	} else {
+		// otherwise look for matches
+		const fileContents = await fs.readFile(filePath, 'utf8');
+
+		switch (ext) {
+			// json path
+			case '.json':
+				data = parseJson(fileContents, filePath);
+				break;
+			// yaml paths
+			case '.yaml':
+			case '.yml':
+				data = yaml.load(fileContents, { filename: filePath });
+				break;
+			// csv path
+			case '.csv':
+				data = dsv.csvParse(fileContents);
+				break;
+			// tsv path
+			case '.tsv':
+				data = dsv.tsvParse(fileContents);
+				break;
+			// aml path
+			case '.aml':
+				data = archieml.load(fileContents);
+				break;
+			default:
+				throw new Error(
+					`Unable to parse ${filePath} - no valid processor found for ${ext} extension`,
+				);
+		}
+	}
+
+	return data;
+}
+
+/**
+ * @param {string} dirPath the input directory
+ * @returns {Promise<unknown>}
+ */
+async function quaff(dirPath) {
 	// normalize the input path
-	const cwd = path.normalize(rawPath);
+	const cwd = path.normalize(dirPath);
 
 	// the object we will eventually return with data
 	const output = {};
@@ -30,6 +91,7 @@ module.exports = async function quaff(rawPath) {
 	// a set to watch out for duplicate keys
 	const existing = new Set();
 
+	// loop through the files in the directory
 	await totalist(cwd, async (rel, abs) => {
 		const { name, dir, ext } = path.parse(rel);
 
@@ -55,47 +117,11 @@ module.exports = async function quaff(rawPath) {
 		// otherwise save it for checking future inputs
 		existing.add(key);
 
-		let data;
-
-		// we give JavaScript entries a special treatment
-		if (ext === '.js') {
-			// js path
-			data = require(abs);
-
-			if (typeof data === 'function') {
-				data = await data();
-			}
-		} else {
-			// otherwise look for matches
-			const fileContents = await fs.readFile(abs, 'utf8');
-
-			switch (ext) {
-				// json path
-				case '.json':
-					data = parseJson(fileContents, abs);
-					break;
-				// yaml paths
-				case '.yaml':
-				case '.yml':
-					data = yaml.load(fileContents, { filename: abs });
-					break;
-				// csv path
-				case '.csv':
-					data = dsv.csvParse(fileContents);
-					break;
-				// tsv path
-				case '.tsv':
-					data = dsv.tsvParse(fileContents);
-					break;
-				// aml path
-				case '.aml':
-					data = archieml.load(fileContents);
-					break;
-			}
-		}
-
+		const data = await quaffFile(abs);
 		dset(output, dirs, data);
 	});
 
 	return output;
-};
+}
+
+module.exports = { quaff, quaffFile };

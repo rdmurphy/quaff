@@ -1,3 +1,3 @@
-declare function quaff(rawPath: string): Promise<unknown>;
-
-export = quaff;
+export function quaffFile(filePath: string): Promise<unknown>;
+export function quaff(dirPath: string): Promise<unknown>;
+export {};
