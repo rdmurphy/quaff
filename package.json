@@ -38,7 +38,7 @@
   ],
   "devDependencies": {
     "@rdm/prettier-config": "^1.0.1",
-    "@types/node": "^14.0.22",
+    "@types/node": "^15.6.2",
     "@zeit/git-hooks": "^0.1.4",
     "coveralls": "^3.1.0",
     "np": "^7.0.0",
