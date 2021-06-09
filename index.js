@@ -37,7 +37,7 @@ export async function quaffFile(filePath) {
 	// we give JavaScript entries a special treatment
 	if (ext === '.js') {
 		// js path
-		data = (await import(pathToFileURL(filePath).toString())).default;
+		data = (await import(pathToFileURL(filePath))).default;
 
 		if (typeof data === 'function') {
 			data = await data();
