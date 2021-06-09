@@ -21,7 +21,7 @@
   "scripts": {
     "git-pre-commit": "precise-commits",
     "test": "node test/test.js",
-    "coverage": "nyc --reporter text --reporter lcovonly npm run test",
+    "coverage": "c8 --reporter text --reporter lcovonly npm run test",
     "release": "np --no-yarn"
   },
   "keywords": [
@@ -37,9 +37,9 @@
     "@rdm/prettier-config": "^1.0.1",
     "@types/node": "^14.0.22",
     "@vercel/git-hooks": "^1.0.0",
+    "c8": "^7.7.2",
     "coveralls": "^3.1.0",
     "np": "^7.5.0",
-    "nyc": "^15.1.0",
     "precise-commits": "^1.0.2",
     "prettier": "^2.0.5",
     "uvu": "^0.5.0"
