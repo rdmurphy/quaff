@@ -1,6 +1,7 @@
 // internal
 import { promises as fs } from 'fs';
 import path from 'path';
+import { pathToFileURL } from 'url';
 
 // packages
 import archieml from 'archieml';
@@ -36,7 +37,7 @@ export async function quaffFile(filePath) {
 	// we give JavaScript entries a special treatment
 	if (ext === '.js') {
 		// js path
-		data = (await import(filePath)).default;
+		data = (await import(pathToFileURL(filePath).toString())).default;
 
 		if (typeof data === 'function') {
 			data = await data();
