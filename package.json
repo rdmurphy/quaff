@@ -1,13 +1,10 @@
 {
   "name": "quaff",
+  "type": "module",
   "version": "4.2.0",
   "description": "Collect JS/JSON/YAML/YML/CSV/TSV/ArchieML files from a source folder and convert them into a single object.",
-  "main": "index.js",
+  "exports": "./index.js",
   "types": "types.d.ts",
-  "exports": {
-    "import": "./wrapper.mjs",
-    "require": "./index.js"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rdmurphy/quaff.git"
@@ -19,7 +16,7 @@
     "types.d.ts"
   ],
   "engines": {
-    "node": ">=10"
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "scripts": {
     "git-pre-commit": "precise-commits",
@@ -39,7 +36,7 @@
   "devDependencies": {
     "@rdm/prettier-config": "^1.0.1",
     "@types/node": "^14.0.22",
-    "@zeit/git-hooks": "^0.1.4",
+    "@vercel/git-hooks": "^1.0.0",
     "coveralls": "^3.1.0",
     "np": "^7.5.0",
     "nyc": "^15.1.0",

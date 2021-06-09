@@ -1,14 +1,14 @@
 // internal
-const fs = require('fs').promises;
-const path = require('path');
+import { promises as fs } from 'fs';
+import path from 'path';
 
 // packages
-const archieml = require('archieml');
-const { dset } = require('dset');
-const dsv = require('d3-dsv');
-const parseJson = require('parse-json');
-const { totalist } = require('totalist');
-const yaml = require('js-yaml');
+import archieml from 'archieml';
+import { dset } from 'dset';
+import dsv from 'd3-dsv';
+import parseJson from 'parse-json';
+import { totalist } from 'totalist';
+import yaml from 'js-yaml';
 
 /**
  * quaff's valid extensions.
@@ -28,7 +28,7 @@ const validExtensions = [
  * @param {string} filePath the input file path
  * @returns {Promise<unknown>}
  */
-async function quaffFile(filePath) {
+export async function quaffFile(filePath) {
 	const ext = path.extname(filePath);
 
 	let data;
@@ -36,7 +36,7 @@ async function quaffFile(filePath) {
 	// we give JavaScript entries a special treatment
 	if (ext === '.js') {
 		// js path
-		data = require(filePath);
+		data = (await import(filePath)).default;
 
 		if (typeof data === 'function') {
 			data = await data();
@@ -81,7 +81,7 @@ async function quaffFile(filePath) {
  * @param {string} dirPath the input directory
  * @returns {Promise<unknown>}
  */
-async function quaff(dirPath) {
+export async function quaff(dirPath) {
 	// normalize the input path
 	const cwd = path.normalize(dirPath);
 
@@ -123,5 +123,3 @@ async function quaff(dirPath) {
 
 	return output;
 }
-
-module.exports = { quaff, quaffFile };

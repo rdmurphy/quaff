@@ -1,15 +1,15 @@
 // native
-const { test: it } = require('uvu');
-const assert = require('assert').strict;
-const fs = require('fs').promises;
+import { test as it } from 'uvu';
+import { strict as assert } from 'assert';
+import { promises as fs } from 'fs';
 
 // packages
-const archieml = require('archieml');
-const dsv = require('d3-dsv');
-const yaml = require('js-yaml');
+import archieml from 'archieml';
+import dsv from 'd3-dsv';
+import yaml from 'js-yaml';
 
 // internal
-const { quaff, quaffFile } = require('..');
+import { quaff, quaffFile } from '../index.js';
 
 const readJson = async (filepath) =>
 	JSON.parse(await fs.readFile(filepath, 'utf8'));
@@ -115,19 +115,19 @@ it('should throw an error when attempting to load bad YAML', async () => {
 
 it('should return what is exported from a JavaScript file (no function)', async () => {
 	assert.deepStrictEqual(await quaff('./test/source/basic_js'), {
-		corgis: require('./source/basic_js/corgis.js'),
+		corgis: (await import('./source/basic_js/corgis.js')).default,
 	});
 });
 
 it('should return what is exported from a JavaScript file (sync function)', async () => {
 	assert.deepStrictEqual(await quaff('./test/source/sync_js'), {
-		corgis: require('./source/sync_js/corgis.js')(),
+		corgis: (await import('./source/sync_js/corgis.js')).default(),
 	});
 });
 
 it('should return what is exported from a JavaScript file (async function)', async () => {
 	assert.deepStrictEqual(await quaff('./test/source/async_js'), {
-		corgis: await require('./source/async_js/corgis.js')(),
+		corgis: await (await import('./source/sync_js/corgis.js')).default(),
 	});
 });
 
