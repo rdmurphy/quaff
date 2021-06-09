@@ -37,6 +37,7 @@ export async function quaffFile(filePath) {
 	// we give JavaScript entries a special treatment
 	if (ext === '.js') {
 		// js path
+		// @ts-ignore - dynamic imports *can* take URL objects, but TypeScript disagrees
 		data = (await import(pathToFileURL(filePath))).default;
 
 		if (typeof data === 'function') {
