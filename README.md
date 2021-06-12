@@ -12,6 +12,10 @@
   <a href="https://packagephobia.now.sh/result?p=quaff"><img src="https://packagephobia.now.sh/badge?p=quaff" alt="install size"></a>
 </p>
 
+## Important!
+
+`quaff` is now a [pure ESM package](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c). It can no longer be `require()`'d from CommonJS. If this functionality is still needed please continue to use `quaff@^4`.
+
 ## Key features
 
 - 🚚 A **data pipeline helper** written in Node.js that works similar to [Middleman](https://middlemanapp.com/)'s [Data Files](https://middlemanapp.com/advanced/data_files/) collector
@@ -24,7 +28,7 @@
 npm install quaff --save-dev
 ```
 
-`quaff` requires **Node.js 10 or later**.
+`quaff` requires **Node.js 12.20.0 or later**.
 
 ## Usage
 
@@ -41,13 +45,12 @@ data/
     story.aml
 ```
 
-After `require()`'ing `quaff`:
+After `import`'ing `quaff`:
 
 ```js
-const quaff = require('quaff');
+import { load } from 'quaff';
 
-const data = await quaff('./data/');
-
+const data = await load('./data/');
 console.log(data);
 ```
 
@@ -89,10 +92,10 @@ And the results...
 
 One of the biggest features added in `quaff` 4.0 is the ability to load JavaScript files. But how exactly does that work?
 
-JavaScript files that are consumed by `quaff` have to follow one simple rule - they must export a default function (or value) at `module.exports`. All three of these are valid and return the same value:
+JavaScript files that are consumed by `quaff` have to follow one simple rule - they must `export default` a function, an async function or value. All three of these are valid and return the same value:
 
 ```js
-module.exports = [
+export default [
 	{
 		name: 'Pudge',
 		instagram: 'https://instagram.com/pudgethecorgi/',
@@ -101,7 +104,7 @@ module.exports = [
 ```
 
 ```js
-module.exports = () => [
+export default () => [
 	{
 		name: 'Pudge',
 		instagram: 'https://instagram.com/pudgethecorgi/',
@@ -110,7 +113,7 @@ module.exports = () => [
 ```
 
 ```js
-module.exports = async () => [
+export default async () => [
 	{
 		name: 'Pudge',
 		instagram: 'https://instagram.com/pudgethecorgi/',
@@ -118,12 +121,12 @@ module.exports = async () => [
 ];
 ```
 
-The final example above is the most interesting one - `async` functions are supported! This means you can write code to hit API endpoints, or do other asynchronous work, and `quaff` will wait for those to resolve as it prepares the data object it returns.
+The final example above is the most interesting one - `async` functions also work! This means you can write code to hit API endpoints, or do other asynchronous work, and `quaff` will wait for those to resolve.
 
 ```js
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-module.exports = async () => {
+export default async () => {
 	const res = await fetch('https://my-cool-api/');
 	const data = await res.json();
 
@@ -135,9 +138,9 @@ module.exports = async () => {
 Don't have a `Promise` to do async work with? Working with a callback interface? Just wrap it in one!
 
 ```js
-const apiHelper = require('my-callback-api');
+import {apiHelper } from 'my-callback-api';
 
-module.exports = () => {
+export default () => {
 	return new Promise((resolve, reject) => {
 		apiHelper('people', (err, data) => {
 			if (err) return reject(err);
