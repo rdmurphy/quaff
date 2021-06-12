@@ -2,11 +2,18 @@
   "compilerOptions": {
     "checkJs": true,
     "noEmit": true,
-    "target": "es2020",
+    "target": "es2019", // Node v12
     "module": "es2020",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "strict": true
+    "allowSyntheticDefaultImports": true,
+    // ESM doesn't yet support JSON modules
+    "resolveJsonModule": false,
+    "strict": true,
+    "pretty": true,
+    "forceConsistentCasingInFileNames": true,
+    "useDefineForClassFields": true,
+    "skipLibCheck": true,
+    "noEmitOnError": true,
   },
   "include": ["index.js"]
 }
