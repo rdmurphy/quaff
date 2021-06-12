@@ -17,6 +17,8 @@ import yaml from 'js-yaml';
  */
 const validExtensions = [
 	'.js',
+	'.cjs',
+	'.mjs',
 	'.json',
 	'.yaml',
 	'.yml',
@@ -29,13 +31,13 @@ const validExtensions = [
  * @param {string} filePath the input file path
  * @returns {Promise<unknown>}
  */
-export async function quaffFile(filePath) {
+export async function loadFile(filePath) {
 	const ext = path.extname(filePath);
 
 	let data;
 
 	// we give JavaScript entries a special treatment
-	if (ext === '.js') {
+	if (ext === '.js' || ext === '.cjs' || ext === '.mjs') {
 		// js path
 		// @ts-ignore - dynamic imports *can* take URL objects, but TypeScript disagrees
 		data = (await import(pathToFileURL(filePath))).default;
@@ -83,7 +85,7 @@ export async function quaffFile(filePath) {
  * @param {string} dirPath the input directory
  * @returns {Promise<unknown>}
  */
-export async function quaff(dirPath) {
+export async function load(dirPath) {
 	// normalize the input path
 	const cwd = path.normalize(dirPath);
 
@@ -119,7 +121,7 @@ export async function quaff(dirPath) {
 		// otherwise save it for checking future inputs
 		existing.add(key);
 
-		const data = await quaffFile(abs);
+		const data = await loadFile(abs);
 		dset(output, dirs, data);
 	});
 
