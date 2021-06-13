@@ -6,14 +6,13 @@ import { pathToFileURL } from 'url';
 // packages
 import archieml from 'archieml';
 import { dset } from 'dset';
-import dsv from 'd3-dsv';
+import { csvParse, tsvParse } from 'd3-dsv';
 import parseJson from 'parse-json';
 import { totalist } from 'totalist';
 import yaml from 'js-yaml';
 
 /**
  * quaff's valid extensions.
- * @type {string[]}
  */
 const validExtensions = [
 	'.js',
@@ -28,13 +27,14 @@ const validExtensions = [
 ];
 
 /**
- * @param {string} filePath the input file path
+ * @param filePath the input file path
  * @returns {Promise<unknown>}
  */
-export async function loadFile(filePath) {
+export async function loadFile(filePath: string): Promise<unknown> {
 	const ext = path.extname(filePath);
 
-	let data;
+	// it can return absolutely anything
+	let data: unknown;
 
 	// we give JavaScript entries a special treatment
 	if (ext === '.js' || ext === '.cjs' || ext === '.mjs') {
@@ -61,11 +61,11 @@ export async function loadFile(filePath) {
 				break;
 			// csv path
 			case '.csv':
-				data = dsv.csvParse(fileContents);
+				data = csvParse(fileContents);
 				break;
 			// tsv path
 			case '.tsv':
-				data = dsv.tsvParse(fileContents);
+				data = tsvParse(fileContents);
 				break;
 			// aml path
 			case '.aml':
@@ -82,15 +82,20 @@ export async function loadFile(filePath) {
 }
 
 /**
- * @param {string} dirPath the input directory
- * @returns {Promise<unknown>}
+ * We know this will return a string-keyed Object, but that's about it.
  */
-export async function load(dirPath) {
+export type LoadReturnValue = Record<string, unknown>;
+
+/**
+ * @param dirPath the input directory
+ * @returns {Promise<LoadReturnValue>}
+ */
+export async function load(dirPath: string): Promise<LoadReturnValue> {
 	// normalize the input path
 	const cwd = path.normalize(dirPath);
 
 	// the object we will eventually return with data
-	const output = {};
+	const output: LoadReturnValue = {};
 
 	// a set to watch out for duplicate keys
 	const existing = new Set();

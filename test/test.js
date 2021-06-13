@@ -5,20 +5,20 @@ import { promises as fs } from 'fs';
 
 // packages
 import archieml from 'archieml';
-import dsv from 'd3-dsv';
+import { csvParse, tsvParse } from 'd3-dsv';
 import yaml from 'js-yaml';
 
 // internal
-import * as quaff from '../index.js';
+import * as quaff from '../lib/index.js';
 
 const readJson = async (filepath) =>
 	JSON.parse(await fs.readFile(filepath, 'utf8'));
 const readYaml = async (filepath) =>
 	yaml.load(await fs.readFile(filepath, 'utf8'));
 const readCsv = async (filepath) =>
-	dsv.csvParse(await fs.readFile(filepath, 'utf8'));
+	csvParse(await fs.readFile(filepath, 'utf8'));
 const readTsv = async (filepath) =>
-	dsv.tsvParse(await fs.readFile(filepath, 'utf8'));
+	tsvParse(await fs.readFile(filepath, 'utf8'));
 const readArchieML = async (filepath) =>
 	archieml.load(await fs.readFile(filepath, 'utf8'));
 

@@ -3,24 +3,24 @@
   "type": "module",
   "version": "4.2.0",
   "description": "Collect JS/JSON/YAML/YML/CSV/TSV/ArchieML files from a source folder and convert them into a single object.",
-  "exports": "./index.js",
-  "types": "types.d.ts",
+  "exports": "./lib/index.js",
+  "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rdmurphy/quaff.git"
   },
-  "author": "Ryan Murphy <ryan@rdmurphy.org>",
+  "author": "Ryan Murphy",
   "license": "MIT",
   "files": [
-    "index.js",
-    "types.d.ts"
+    "lib"
   ],
   "engines": {
     "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
   },
   "scripts": {
+    "build": "tsc",
     "git-pre-commit": "precise-commits",
-    "test": "node test/test.js",
+    "test": "npm run build && node test/test.js",
     "coverage": "c8 --reporter text --reporter lcovonly npm run test",
     "release": "np --no-yarn"
   },
@@ -35,6 +35,9 @@
   ],
   "devDependencies": {
     "@rdm/prettier-config": "^1.0.1",
+    "@tsconfig/node12": "^1.0.8",
+    "@types/d3-dsv": "^2.0.1",
+    "@types/js-yaml": "^4.0.1",
     "@types/node": "^14.0.22",
     "@vercel/git-hooks": "^1.0.0",
     "c8": "^7.7.2",
@@ -42,11 +45,12 @@
     "np": "^7.5.0",
     "precise-commits": "^1.0.2",
     "prettier": "^2.0.5",
+    "typescript": "^4.3.2",
     "uvu": "^0.5.0"
   },
   "dependencies": {
     "archieml": "^0.4.2",
-    "d3-dsv": "^2.0.0",
+    "d3-dsv": "^3.0.1",
     "dset": "^3.0.0",
     "js-yaml": "^4.0.0",
     "parse-json": "^5.0.0",

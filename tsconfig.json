@@ -1,0 +1,15 @@
+{
+  "extends": "@tsconfig/node12/tsconfig.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "checkJs": true,
+    "declaration": true,
+    "module": "ES2020",
+    "moduleResolution": "node",
+    "outDir": "lib",
+    "pretty": true,
+    "noEmitOnError": true
+  },
+  "files": ["source/index.ts", "source/lib.d.ts"]
+}
