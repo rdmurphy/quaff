@@ -11,5 +11,9 @@
 		"pretty": true,
 		"noEmitOnError": true
 	},
-	"files": ["source/index.ts", "source/lib.d.ts"]
+	"files": ["source/index.ts", "source/lib.d.ts"],
+	"ts-node": {
+		"transpileOnly": true,
+		"files": true
+	}
 }

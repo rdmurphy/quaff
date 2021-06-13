@@ -9,17 +9,17 @@ import { csvParse, tsvParse } from 'd3-dsv';
 import yaml from 'js-yaml';
 
 // internal
-import * as quaff from '../lib/index.js';
+import * as quaff from '../source/index.js';
 
-const readJson = async (filepath) =>
+const readJson = async (filepath: string) =>
 	JSON.parse(await fs.readFile(filepath, 'utf8'));
-const readYaml = async (filepath) =>
+const readYaml = async (filepath: string) =>
 	yaml.load(await fs.readFile(filepath, 'utf8'));
-const readCsv = async (filepath) =>
+const readCsv = async (filepath: string) =>
 	csvParse(await fs.readFile(filepath, 'utf8'));
-const readTsv = async (filepath) =>
+const readTsv = async (filepath: string) =>
 	tsvParse(await fs.readFile(filepath, 'utf8'));
-const readArchieML = async (filepath) =>
+const readArchieML = async (filepath: string) =>
 	archieml.load(await fs.readFile(filepath, 'utf8'));
 
 it('should normalize a trailing extra slash', async () => {
@@ -119,10 +119,12 @@ it('should return what is exported from a JavaScript file (no function)', async 
 	});
 
 	assert.deepStrictEqual(await quaff.load('./test/source/basic_cjs'), {
+		// @ts-ignore
 		corgis: (await import('./source/basic_cjs/corgis.cjs')).default,
 	});
 
 	assert.deepStrictEqual(await quaff.load('./test/source/basic_mjs'), {
+		// @ts-ignore
 		corgis: (await import('./source/basic_mjs/corgis.mjs')).default,
 	});
 });
@@ -133,10 +135,12 @@ it('should return what is exported from a JavaScript file (sync function)', asyn
 	});
 
 	assert.deepStrictEqual(await quaff.load('./test/source/sync_cjs'), {
+		// @ts-ignore
 		corgis: (await import('./source/sync_cjs/corgis.cjs')).default(),
 	});
 
 	assert.deepStrictEqual(await quaff.load('./test/source/sync_mjs'), {
+		// @ts-ignore
 		corgis: (await import('./source/sync_mjs/corgis.mjs')).default(),
 	});
 });
@@ -147,10 +151,12 @@ it('should return what is exported from a JavaScript file (async function)', asy
 	});
 
 	assert.deepStrictEqual(await quaff.load('./test/source/async_cjs'), {
+		// @ts-ignore
 		corgis: await (await import('./source/async_cjs/corgis.cjs')).default(),
 	});
 
 	assert.deepStrictEqual(await quaff.load('./test/source/async_mjs'), {
+		// @ts-ignore
 		corgis: await (await import('./source/async_mjs/corgis.mjs')).default(),
 	});
 });
