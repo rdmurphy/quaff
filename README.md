@@ -88,6 +88,30 @@ And the results...
 }
 ```
 
+As of `5.0.0` it's now possible to load a single file at a time, enabling more custom approaches in case `load` doesn't work exactly the way you'd like.
+
+```js
+import { loadFile } from 'quaff';
+
+const data = await loadFile('./data/mammals/bears.csv');
+console.log(data);
+```
+
+And the results...
+
+```json
+[
+	{
+		"name": "Steve",
+		"type": "Polar bear"
+	},
+	{
+		"name": "Angelica",
+		"type": "Sun bear"
+	}
+]
+```
+
 ## Advanced Usage with JavaScript files
 
 One of the biggest features added in `quaff` 4.0 is the ability to load JavaScript files. But how exactly does that work?

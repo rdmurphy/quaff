@@ -7,13 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [5.0.0] - 2021-06-12
+
 ### Added
-- The `quaff` file processor is now available at `parseFile`. This makes it possible to tap into all of `quaff`'s processors to load a single file. The (now) named `parse` export works the same as before and uses `parseFile` behind the scenes.
-- It is now possible to pass in JavaScript files using the `.cjs` and `.mjs` extensions.
+- The `quaff` individual file processor is now available at `loadFile`. This makes it possible to tap into all of `quaff`'s processors to load a single file. The newly named `load` export works the same as before and uses `loadFile` behind the scenes.
+- It is now possible to include JavaScript files using the `.cjs` and `.mjs` extensions.
 
 ### Changed
 - `quaff` is now a [pure ESM package](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c). It can no longer be `require()`'d from CommonJS. If this functionality is still needed please continue to use `quaff@^4`. It is also possible to [dynamically import ESM in CommonJS](https://nodejs.org/api/esm.html#esm_import_expressions) (`await import('quaff')`) if that is compatible with your use case.
-- `quaff` no longer has a default export and now uses two named exports - `parse` and `parseFile`.
+- `quaff` no longer has a default export and now uses two named exports - `load` and `loadFile`.
 
 ## [4.2.0] - 2020-07-16
 
