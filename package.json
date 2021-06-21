@@ -37,7 +37,7 @@
     "@tsconfig/node12": "^1.0.8",
     "@types/d3-dsv": "^2.0.1",
     "@types/js-yaml": "^4.0.1",
-    "@types/node": "^14.0.22",
+    "@types/node": "^15.12.4",
     "@vercel/git-hooks": "^1.0.0",
     "np": "^7.5.0",
     "precise-commits": "^1.0.2",
