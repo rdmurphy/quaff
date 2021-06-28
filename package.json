@@ -35,7 +35,7 @@
   "devDependencies": {
     "@rdm/prettier-config": "^1.0.1",
     "@tsconfig/node12": "^1.0.8",
-    "@types/d3-dsv": "^2.0.1",
+    "@types/d3-dsv": "^3.0.0",
     "@types/js-yaml": "^4.0.1",
     "@types/node": "^14.0.22",
     "@vercel/git-hooks": "^1.0.0",
