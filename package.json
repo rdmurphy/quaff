@@ -52,7 +52,7 @@
     "dset": "^3.0.0",
     "js-yaml": "^4.0.0",
     "parse-json": "^6.0.0",
-    "totalist": "^2.0.0"
+    "totalist": "^3.0.0"
   },
   "prettier": "@rdm/prettier-config"
 }
