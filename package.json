@@ -34,7 +34,7 @@
   ],
   "devDependencies": {
     "@rdm/prettier-config": "^3.0.0",
-    "@tsconfig/node12": "^1.0.8",
+    "@tsconfig/node12": "^12.1.0",
     "@types/d3-dsv": "^3.0.0",
     "@types/js-yaml": "^4.0.1",
     "@types/node": "^18.0.1",
